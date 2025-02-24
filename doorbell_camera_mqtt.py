@@ -7,7 +7,7 @@ from picamera2 import Picamera2  # picamera2 import for newer versions
 mqtt_broker = "192.168.4.143"  # Replace with your MQTT broker's IP address
 mqtt_port = 1883  # Default MQTT port
 mqtt_username = "homeassistant"  # Replace with your MQTT username
-mqtt_password = "OolongTeasss0516!"  # Replace with your MQTT password
+mqtt_password = "" # Replace with your MQTT password
 mqtt_topic = "homeassistant/doorbell/video"  # MQTT topic for video
 
 # Path where videos will be stored (NAS-mounted directory)
