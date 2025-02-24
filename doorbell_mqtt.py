@@ -14,7 +14,7 @@ GPIO.setup(BUTTON_GPIO, GPIO.IN, pull_up_down=GPIO.PUD_UP)  # Use pull-up resist
 
 # MQTT setup
 client = mqtt.Client()
-client.username_pw_set("homeassistant", "OolongTeasss0516!")  # If using authentication
+client.username_pw_set("homeassistant", "" # put password here)  # If using authentication
 client.connect(MQTT_BROKER, MQTT_PORT, 60)
 
 # Function to send MQTT message to turn buzzer ON and OFF
