@@ -1,0 +1,115 @@
+esphome:
+  name: rts-buzzer
+
+esp32:
+  board: nodemcu-32s
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  password: ""
+
+ota:
+  - platform: esphome
+    password: ""
+
+wifi:
+  ssid: "ICE Border Patrol"
+  password: "RowdySailors1899"
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Rts-Buzzer Fallback Hotspot"
+    password: "mcJ5Rnpz3esx"
+
+captive_portal:
+
+mqtt:
+  broker: "192.168.4.143"
+  username: "homeassistant"
+  password: "OolongTeasss0516!"
+  discovery: True
+  on_message:
+    - topic: "esp32/rts-buzzer"
+      payload: "ON"
+      then:
+        - script.execute: play_doorbell
+        - mqtt.publish:
+            topic: "esp32/buzzer-response"
+            payload: "BUZZER_ON"
+    - topic: "esp32/rts-buzzer"
+      payload: "OFF"
+      then:
+        - output.turn_off: buzzer_pwm
+        - mqtt.publish:
+            topic: "esp32/buzzer-response"
+            payload: "BUZZER_OFF"
+
+# For passive buzzer - use PWM output
+output:
+  - platform: ledc
+    pin: GPIO5
+    id: buzzer_pwm
+    frequency: 2000 # Default frequency
+
+# Create a script for the doorbell sound
+script:
+  - id: play_doorbell
+    then:
+      # Define clear, spaced notes for better melody
+      - output.ledc.set_frequency: { id: buzzer_pwm, frequency: 1320 } # E7
+      - output.set_level: { id: buzzer_pwm, level: 50% }
+      - delay: 200ms
+      - output.turn_off: buzzer_pwm
+      - delay: 50ms
+
+      - output.ledc.set_frequency: { id: buzzer_pwm, frequency: 1320 } # E7
+      - output.set_level: { id: buzzer_pwm, level: 50% }
+      - delay: 200ms
+      - output.turn_off: buzzer_pwm
+      - delay: 200ms
+
+      - output.ledc.set_frequency: { id: buzzer_pwm, frequency: 1320 } # E7
+      - output.set_level: { id: buzzer_pwm, level: 50% }
+      - delay: 200ms
+      - output.turn_off: buzzer_pwm
+      - delay: 200ms
+
+      - output.ledc.set_frequency: { id: buzzer_pwm, frequency: 1056 } # C7
+      - output.set_level: { id: buzzer_pwm, level: 50% }
+      - delay: 200ms
+      - output.turn_off: buzzer_pwm
+      - delay: 50ms
+
+      - output.ledc.set_frequency: { id: buzzer_pwm, frequency: 1320 } # E7
+      - output.set_level: { id: buzzer_pwm, level: 50% }
+      - delay: 200ms
+      - output.turn_off: buzzer_pwm
+      - delay: 200ms
+
+      - output.ledc.set_frequency: { id: buzzer_pwm, frequency: 1584 } # G7
+      - output.set_level: { id: buzzer_pwm, level: 50% }
+      - delay: 200ms
+      - output.turn_off: buzzer_pwm
+      - delay: 400ms
+
+      - output.ledc.set_frequency: { id: buzzer_pwm, frequency: 792 } # G6
+      - output.set_level: { id: buzzer_pwm, level: 50% }
+      - delay: 200ms
+      - output.turn_off: buzzer_pwm
+      - delay: 400ms
+
+      # More notes can be added here to complete the theme!
+
+# Define a switch to control the buzzer using MQTT
+switch:
+  - platform: template
+    name: "Doorbell Buzzer"
+    turn_on_action:
+      - script.execute: play_doorbell
+    turn_off_action:
+      - output.turn_off: buzzer_pwm
