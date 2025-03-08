@@ -18,8 +18,8 @@ ota:
     password: ""
 
 wifi:
-  ssid: "ICE Border Patrol"
-  password: "RowdySailors1899"
+  ssid: ""
+  password: ""
 
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
@@ -30,8 +30,8 @@ captive_portal:
 
 mqtt:
   broker: "192.168.4.143"
-  username: "homeassistant"
-  password: "OolongTeasss0516!"
+  username: ""
+  password: ""
   discovery: True
   on_message:
     - topic: "esp32/rts-buzzer"
