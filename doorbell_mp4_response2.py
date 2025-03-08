@@ -315,7 +315,7 @@ def main():
 
     # MQTT setup
     client = mqtt.Client()
-    client.username_pw_set("homeassistant", "OolongTeasss0516!")  # Authentication
+    client.username_pw_set("", "")  # Authentication
     client.on_connect = on_connect
     client.on_message = on_message
 
