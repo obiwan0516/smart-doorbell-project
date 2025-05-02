@@ -1,0 +1,30 @@
+Real-Time Systems Response Time Analysis
+Session ID: 20250430_121634
+Date: 2025-04-30 12:31:55
+Total measurements: 14
+
+BUTTON TO BUZZER RESPONSE TIMES:
+  Count: 3
+  Minimum latency: 0.066639 seconds
+  Maximum latency: 0.219872 seconds
+  Mean latency: 0.125388 seconds
+  Median latency: 0.089651 seconds
+  Standard deviation: 0.082631 seconds
+
+BUTTON TO VIDEO RECORDING RESPONSE TIMES:
+  Count: 14
+  Minimum latency: 0.101016 seconds
+  Maximum latency: 0.102224 seconds
+  Mean latency: 0.101573 seconds
+  Median latency: 0.101518 seconds
+  Standard deviation: 0.000322 seconds
+
+SYSTEM ANALYSIS NOTES:
+1. All measurements represent end-to-end system latency
+2. Buzzer response includes network traversal time through MQTT
+3. Video recording latency includes process startup overhead
+4. Both measurements include button debounce delay (1000ms)
+
+RAW DATA FILES:
+- /var/www/html/videos/response_data/20250430_121634_buzzer_measurements.csv
+- /var/www/html/videos/response_data/20250430_121634_video_measurements.csv
